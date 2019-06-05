@@ -13,14 +13,19 @@ public class SuperUser extends User{
 	}
 
 	public SuperUser(String username, String password) {
-		super(username, password);
+		super(username, password, acntNum);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void login(String username, String password) {
 		System.out.println("Administrator");
-		System.out.println("Username: " + username + "\nPassword: "+ password + "\n");
+		System.out.println("Username: " + username + "\nPassword: "+ password);
+	}
+
+	@Override
+	public void account(int accountNumber) {
+		System.out.println("Account: " + accountNumber + "\n");
 	}
 	
 }

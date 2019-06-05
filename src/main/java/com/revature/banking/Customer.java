@@ -2,6 +2,7 @@ package com.revature.banking;
 
 public class Customer extends User{
 
+	float balance;
 	/**
 	 * 
 	 */
@@ -13,13 +14,19 @@ public class Customer extends User{
 	}
 
 	public Customer(String username, String password) {
-		super(username, password);
+		super(username, password, acntNum);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void login(String username, String password) {
 		System.out.println("Customer");
-		System.out.println("Username: " + username + "\nPassword: "+ password + "\n");
+		System.out.println("Username: " + username + "\nPassword: "+ password);
 	}
+
+	@Override
+	public void account(int accountNumber) {
+		System.out.println("Account: " + accountNumber + "\n");
+	}
+	
 }
