@@ -16,4 +16,10 @@ public class Customer extends User{
 		super(username, password);
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public void login(String username, String password) {
+		System.out.println("Customer");
+		System.out.println("Username: " + username + "\nPassword: "+ password + "\n");
+	}
 }
