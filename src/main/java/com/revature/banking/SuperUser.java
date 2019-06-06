@@ -1,5 +1,7 @@
 package com.revature.banking;
 
+import java.text.DecimalFormat;
+
 public class SuperUser extends User{
 
 	/**
@@ -25,38 +27,35 @@ public class SuperUser extends User{
 
 	@Override
 	public void account(int accountNumber) {
+		DecimalFormat df = new DecimalFormat();
+		df.setMinimumFractionDigits(2);
+		df.setMaximumFractionDigits(2);
 		System.out.println("Account: " + accountNumber);
-		System.out.println("Balance: $" + getBalance() + "\n");
+		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
 	}
-
 	@Override
 	public void viewAllCust() {
 		// TODO Auto-generated method stub
 		super.viewAllCust();
 	}
-
 	@Override
 	public void viewAllTrans() {
 		// TODO Auto-generated method stub
 		super.viewAllTrans();
 	}
-
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 		super.create();
 	}
-
 	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
 		super.delete();
 	}
-
 	@Override
 	public void initialDeposit(double amount) {
 		// TODO Auto-generated method stub
 		setBalance(amount);
-	}
-	
+	}	
 }

@@ -64,15 +64,15 @@ public abstract class User implements Serializable, Login, customerAction, admin
 
 	@Override
 	public void login(String username, String password) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-	
-
 	@Override
 	public void account(int accountNumber) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void initialDeposit(double amount) {
+		// TODO Auto-generated method stub	
 	}
 
 	@Override

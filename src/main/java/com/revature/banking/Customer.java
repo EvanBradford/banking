@@ -1,5 +1,7 @@
 package com.revature.banking;
 
+import java.text.DecimalFormat;
+
 public class Customer extends User{
 	/**
 	 * 
@@ -37,26 +39,36 @@ public class Customer extends User{
 
 	@Override
 	public void login(String username, String password) {
+		setUsername(username);
+		setPassword(password);
 		System.out.println("Customer");
 		System.out.println("Username: " + username + "\nPassword: "+ password);
 	}
 
 	@Override
 	public void account(int accountNumber) {
+		DecimalFormat df = new DecimalFormat();
+		df.setMinimumFractionDigits(2);
+		df.setMaximumFractionDigits(2);
+		setAcntNum(accountNumber);
 		System.out.println("Account: " + accountNumber);
-		System.out.println("Balance: $" + getBalance() + "\n");
+		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
 	}
 
 	@Override
 	public void deposit(double amount, int accountNum) {
-		// TODO Auto-generated method stub
-		super.deposit(amount, accountNum);
+		double tmp = getBalance();
+		tmp += amount;
+		tmp = Math.round(tmp * 100.0) / 100.0;
+		setBalance(tmp);
 	}
 
 	@Override
 	public void withdraw(double amount, int accountNum) {
-		// TODO Auto-generated method stub
-		super.withdraw(amount, accountNum);
+		double tmp = getBalance();
+		tmp -= amount;
+		tmp = Math.round(tmp * 100.0) / 100.0;
+		setBalance(tmp);
 	}
 
 	@Override
