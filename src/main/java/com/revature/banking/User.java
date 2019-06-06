@@ -2,7 +2,7 @@ package com.revature.banking;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable, Login{
+public abstract class User implements Serializable, Login, customerAction, adminAction{
 	/**
 	 * 
 	 */
@@ -10,17 +10,19 @@ public abstract class User implements Serializable, Login{
 	protected String username;
 	protected String password;
 	protected static int acntNum;
+	protected static double balance;
 	
 	public User()
 	{
 		
 	}
 
-	public User(String username, String password, int acntNum) {
+	public User(String username, String password, int acntNum, double balance) {
 		super();
 		this.username = username;
 		this.password = password;
 		User.acntNum = acntNum;
+		User.balance = balance;
 	}
 
 	public String getUsername() {
@@ -45,6 +47,19 @@ public abstract class User implements Serializable, Login{
 
 	public void setAcntNum(int acntNum) {
 		User.acntNum = acntNum;
+	}
+
+	public User(double balance) {
+		super();
+		User.balance = balance;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		User.balance = balance;
 	}
 
 	@Override
@@ -89,5 +104,59 @@ public abstract class User implements Serializable, Login{
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void deposit(double amount, int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void withdraw(double amount, int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void transfer(double amount, int accountNum1, int accountNum2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void close(int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void open(String username, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewAllCust() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewAllTrans() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
 	}
 }
