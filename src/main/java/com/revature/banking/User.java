@@ -131,7 +131,7 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	}
 
 	@Override
-	public void open(String username, String password) {
+	public void open() {
 		// TODO Auto-generated method stub
 		
 	}

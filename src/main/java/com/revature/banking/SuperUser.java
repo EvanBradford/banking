@@ -57,5 +57,11 @@ public class SuperUser extends User{
 	public void initialDeposit(double amount) {
 		// TODO Auto-generated method stub
 		setBalance(amount);
+	}
+
+	@Override
+	public void display(int accountNum) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

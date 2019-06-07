@@ -41,18 +41,10 @@ public class Customer extends User{
 	public void login(String username, String password) {
 		setUsername(username);
 		setPassword(password);
-		System.out.println("Customer");
-		System.out.println("Username: " + username + "\nPassword: "+ password);
 	}
 
 	@Override
 	public void account(int accountNumber) {
-		DecimalFormat df = new DecimalFormat();
-		df.setMinimumFractionDigits(2);
-		df.setMaximumFractionDigits(2);
-		setAcntNum(accountNumber);
-		System.out.println("Account: " + accountNumber);
-		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
 	}
 
 	@Override
@@ -84,13 +76,25 @@ public class Customer extends User{
 	}
 
 	@Override
-	public void open(String username, String password) {
+	public void open() {
 		// TODO Auto-generated method stub
-		super.open(username, password);
+		super.open();
 	}
 	@Override
 	public void initialDeposit(double amount) {
 		// TODO Auto-generated method stub
 		setBalance(amount);
+	}
+
+	@Override
+	public void display(int accountNum) {
+		// TODO Auto-generated method stub
+		DecimalFormat df = new DecimalFormat();
+		df.setMinimumFractionDigits(2);
+		df.setMaximumFractionDigits(2);
+		System.out.println("Customer");
+		System.out.println("Username: " + getUsername() + "\nPassword: "+ getPassword());
+		System.out.println("Account: " + accountNum);
+		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
 	}
 }
