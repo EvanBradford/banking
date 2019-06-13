@@ -14,8 +14,8 @@ public class SuperUser extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public SuperUser(String username, String password) {
-		super(username, password, acntNum, balance);
+	public SuperUser(String firstname, String lastname, String username, String password) {
+		super(firstname, lastname, username, password, acntNum, balance);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,7 +61,6 @@ public class SuperUser extends User{
 
 	@Override
 	public void display(int accountNum) {
-		// TODO Auto-generated method stub
-		
-	}	
+		// TODO Auto-generated method stub	
+	}
 }

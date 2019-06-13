@@ -7,6 +7,8 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	 * 
 	 */
 	private static final long serialVersionUID = 4981386263987485356L;
+	protected String firstname;
+	protected String lastname;
 	protected String username;
 	protected String password;
 	protected static int acntNum;
@@ -16,13 +18,31 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	{
 		
 	}
-
-	public User(String username, String password, int acntNum, double balance) {
+	
+	public User(String firstname, String lastname, String username, String password, int acntNum, double balance) {
 		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.username = username;
 		this.password = password;
 		User.acntNum = acntNum;
 		User.balance = balance;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getUsername() {
@@ -41,17 +61,12 @@ public abstract class User implements Serializable, Login, customerAction, admin
 		this.password = password;
 	}
 
-	public int getAcntNum() {
+	public static int getAcntNum() {
 		return acntNum;
 	}
 
-	public void setAcntNum(int acntNum) {
+	public static void setAcntNum(int acntNum) {
 		User.acntNum = acntNum;
-	}
-
-	public User(double balance) {
-		super();
-		User.balance = balance;
 	}
 
 	public double getBalance() {
@@ -79,6 +94,8 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -93,6 +110,16 @@ public abstract class User implements Serializable, Login, customerAction, admin
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (firstname == null) {
+			if (other.firstname != null)
+				return false;
+		} else if (!firstname.equals(other.firstname))
+			return false;
+		if (lastname == null) {
+			if (other.lastname != null)
+				return false;
+		} else if (!lastname.equals(other.lastname))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -159,4 +186,5 @@ public abstract class User implements Serializable, Login, customerAction, admin
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

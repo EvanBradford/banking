@@ -13,25 +13,18 @@ public class Customer extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(Integer balance) {
-		super(balance);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Customer(String username, String password, int acntNum) {
-		super(username, password, acntNum, balance);
+	public Customer(String firstname, String lastname, String username, String password) {
+		super(firstname, lastname, username, password, acntNum, balance);
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 
-	@Override
 	public double getBalance() {
 		// TODO Auto-generated method stub
 		return super.getBalance();
 	}
 
-	@Override
 	public void setBalance(double balance) {
 		// TODO Auto-generated method stub
 		super.setBalance(balance);
