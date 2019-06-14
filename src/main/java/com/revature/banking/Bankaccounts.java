@@ -2,31 +2,33 @@ package com.revature.banking;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable, Login, customerAction, adminAction{
+public abstract class Bankaccounts implements Serializable, Login, customerAction, adminAction{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4981386263987485356L;
+	protected static int acntNum;
+	protected static String acntType;
 	protected String firstname;
 	protected String lastname;
 	protected String username;
 	protected String password;
-	protected static int acntNum;
-	protected static double balance;
+	protected double balance;
 	
-	public User()
+	public Bankaccounts()
 	{
 		
 	}
 	
-	public User(String firstname, String lastname, String username, String password, int acntNum, double balance) {
+	public Bankaccounts(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance) {
 		super();
+		Bankaccounts.acntNum = acntNum;
+		Bankaccounts.acntType = acntType;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.password = password;
-		User.acntNum = acntNum;
-		User.balance = balance;
+		this.balance = balance;
 	}
 
 	public String getFirstname() {
@@ -66,7 +68,7 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	}
 
 	public static void setAcntNum(int acntNum) {
-		User.acntNum = acntNum;
+		Bankaccounts.acntNum = acntNum;
 	}
 
 	public double getBalance() {
@@ -74,7 +76,15 @@ public abstract class User implements Serializable, Login, customerAction, admin
 	}
 
 	public void setBalance(double balance) {
-		User.balance = balance;
+		this.balance = balance;
+	}
+	
+	public String getAcntType() {
+		return acntType;
+	}
+
+	public void setAcntType(String acntType) {
+		Bankaccounts.acntType = acntType;
 	}
 
 	@Override
@@ -109,7 +119,7 @@ public abstract class User implements Serializable, Login, customerAction, admin
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Bankaccounts other = (Bankaccounts) obj;
 		if (firstname == null) {
 			if (other.firstname != null)
 				return false;
@@ -186,5 +196,10 @@ public abstract class User implements Serializable, Login, customerAction, admin
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public void display(int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
 }

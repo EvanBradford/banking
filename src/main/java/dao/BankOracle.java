@@ -17,7 +17,7 @@ public class BankOracle implements BankDao {
 
 	private static final Logger log = LogManager.getLogger(BankOracle.class);
 
-	public List<User> getAll() throws Exception {
+	public List<Bankaccounts> getAll() throws Exception {
 		Connection con = ConnectionUtil.getConnection();
 
 		if (con == null) {
@@ -25,17 +25,25 @@ public class BankOracle implements BankDao {
 			throw new Exception("Unable to connect to database");
 		}
 
-		List<User> list;
+		List<Bankaccounts> list;
 		
 		try {			
 			String sql = "select * from BANKACCOUNTS";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
-			list = new LinkedList<User>();
+			list = new LinkedList<Bankaccounts>();
 			
 			while(rs.next()){
-				;//list.add(new User(rs.getInt("id"), rs.getString("name"), rs.getInt("safty")));
+				if(rs.getString("acntType").equals("super"))
+				{
+					list.add(new SuperUser(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance")));
+				}
+				else
+				{
+					list.add(new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance")));
+				}
+				//User(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
 			}
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
@@ -45,9 +53,8 @@ public class BankOracle implements BankDao {
 		return list;
 	}
 
-	public void insert(User a) throws Exception {
+	public void insert(Bankaccounts a) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

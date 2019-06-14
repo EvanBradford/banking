@@ -2,7 +2,7 @@ package com.revature.banking;
 
 import java.text.DecimalFormat;
 
-public class SuperUser extends User{
+public class SuperUser extends Bankaccounts{
 
 	/**
 	 * 
@@ -13,11 +13,12 @@ public class SuperUser extends User{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public SuperUser(String firstname, String lastname, String username, String password) {
-		super(firstname, lastname, username, password, acntNum, balance);
+	public SuperUser(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
+	{
+		super(acntNum, acntType, firstname, lastname, username, password, balance);
 		// TODO Auto-generated constructor stub
 	}
+
 
 	@Override
 	public void login(String username, String password) {

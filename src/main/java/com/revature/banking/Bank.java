@@ -1,11 +1,14 @@
 package com.revature.banking;
 
+import java.util.List;
 import java.util.Scanner;
+
+import dao.BankService;
 
 public class Bank {
 	public static Scanner jin = new Scanner(System.in);
 	public static void main(String[] args) {
-		User account = new Customer();
+		Bankaccounts account = new Customer();
 		boolean banking = true;
 		int choice = 1;
 		int accountNum;
@@ -71,6 +74,14 @@ public class Bank {
 					break;
 				case 6:
 					account.display(accountNum);
+					List<Bankaccounts> list;
+					try {			
+						list = BankService.getAllAccounts();
+					} catch (Exception e) {
+						System.out.println("Opps.. (^_^)");
+						return;
+					}
+					System.out.println(list);
 					break;
 				case 7:
 					banking = false;
