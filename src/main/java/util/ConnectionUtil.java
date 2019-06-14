@@ -31,7 +31,6 @@ public class ConnectionUtil {
 			// load information from properties file
 			Properties props = new Properties();
 			in = ConnectionUtil.class.getClassLoader().getResourceAsStream("connection.properties");
-			//in = new FileInputStream("C:\\training\\examples\\sql\\examples\\jdbc\\src\\main\\resources\\connection.properties");
 			props.load(in);
 
 			// get the connection object
@@ -54,7 +53,6 @@ public class ConnectionUtil {
 
 			}
 		}
-
 		return null;
 	}
 }

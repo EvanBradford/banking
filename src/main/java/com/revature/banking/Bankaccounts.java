@@ -202,4 +202,11 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Bankaccounts [firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
+				+ ", password=" + password + ", balance=" + balance + "]";
+	}
+	
 }
