@@ -35,7 +35,7 @@ public class BankOracle implements BankDao {
 			list = new LinkedList<Bankaccounts>();
 			
 			while(rs.next()){
-				if(rs.getString("acntType").equals("super"))
+				if(rs.getString("acntType").equals("SUPER"))
 				{
 					list.add(new SuperUser(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance")));
 				}
@@ -43,7 +43,6 @@ public class BankOracle implements BankDao {
 				{
 					list.add(new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance")));
 				}
-				//User(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
 			}
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);

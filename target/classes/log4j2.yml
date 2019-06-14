@@ -28,8 +28,3 @@ Configuration:
       AppenderRef:
         - ref: Console_Appender
         - ref: File_Appender
-        
-    com.example.util.ConnectionUtil:
-      level: trace
-      AppenderRef:
-        - ref: File_Appender

@@ -2,7 +2,6 @@ package com.revature.banking;
 
 import java.util.List;
 import java.util.Scanner;
-
 import dao.BankService;
 
 public class Bank {

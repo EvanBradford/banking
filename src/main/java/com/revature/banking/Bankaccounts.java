@@ -7,8 +7,8 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 	 * 
 	 */
 	private static final long serialVersionUID = 4981386263987485356L;
-	protected static int acntNum;
-	protected static String acntType;
+	protected int acntNum;
+	protected String acntType;
 	protected String firstname;
 	protected String lastname;
 	protected String username;
@@ -22,8 +22,8 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 	
 	public Bankaccounts(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance) {
 		super();
-		Bankaccounts.acntNum = acntNum;
-		Bankaccounts.acntType = acntType;
+		this.acntNum = acntNum;
+		this.acntType = acntType;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
@@ -63,12 +63,12 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 		this.password = password;
 	}
 
-	public static int getAcntNum() {
+	public int getAcntNum() {
 		return acntNum;
 	}
 
-	public static void setAcntNum(int acntNum) {
-		Bankaccounts.acntNum = acntNum;
+	public void setAcntNum(int acntNum) {
+		this.acntNum = acntNum;
 	}
 
 	public double getBalance() {
@@ -84,18 +84,15 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 	}
 
 	public void setAcntType(String acntType) {
-		Bankaccounts.acntType = acntType;
+		this.acntType = acntType;
 	}
 
-	@Override
 	public void login(String username, String password) {
 		// TODO Auto-generated method stub	
 	}
-	@Override
 	public void account(int accountNumber) {
 		// TODO Auto-generated method stub	
 	}
-	@Override
 	public void initialDeposit(double amount) {
 		// TODO Auto-generated method stub	
 	}
@@ -142,62 +139,53 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 			return false;
 		return true;
 	}
+	
 
-	@Override
-	public void deposit(double amount, int accountNum) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void withdraw(double amount, int accountNum) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void transfer(double amount, int accountNum1, int accountNum2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void close(int accountNum) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void open() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void viewAllCust() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void viewAllTrans() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void delete() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	public void deposit(double amount, int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void withdraw(double amount, int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void transfer(double amount, int accountNum1, int accountNum2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void close(int accountNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void open() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void display(int accountNum) {
 		// TODO Auto-generated method stub
 		
@@ -205,8 +193,8 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 
 	@Override
 	public String toString() {
-		return "Bankaccounts [firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
-				+ ", password=" + password + ", balance=" + balance + "]";
+		return "Bankaccounts [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", username=" + username + ", password=" + password + ", balance="
+				+ balance + "]";
 	}
-	
 }
