@@ -2,7 +2,7 @@ package com.revature.banking;
 
 import java.io.Serializable;
 
-public abstract class Bankaccounts implements Serializable, Login, customerAction, adminAction{
+public abstract class Bankaccounts implements Serializable, customerAction, adminAction{
 	/**
 	 * 
 	 */
@@ -87,14 +87,15 @@ public abstract class Bankaccounts implements Serializable, Login, customerActio
 		this.acntType = acntType;
 	}
 
-	public void login(String username, String password) {
-		// TODO Auto-generated method stub	
+	public Customer login(String username, String password) {
+		return null;
+	}
+	public SuperUser loginu(String username, String password) {
+		return null;
 	}
 	public void account(int accountNumber) {
-		// TODO Auto-generated method stub	
 	}
 	public void initialDeposit(double amount) {
-		// TODO Auto-generated method stub	
 	}
 
 	@Override

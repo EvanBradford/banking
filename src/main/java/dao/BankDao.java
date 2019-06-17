@@ -6,5 +6,9 @@ import com.revature.banking.*;
 
 public interface BankDao {
 	List<Bankaccounts> getAll() throws Exception;
-	void insert(Bankaccounts a) throws Exception;
+	void insert(String acntType, String firstName, String lastName, String userName, String password, double balance) throws Exception;
+	void delete(int acntNum) throws Exception;
+	Customer login(int acntNum, String userName, String password) throws Exception;
+	SuperUser loginu(int acntNum, String userName, String password) throws Exception;
+	void viewAccount(int acntNum) throws Exception;
 }

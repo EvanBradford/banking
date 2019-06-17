@@ -5,4 +5,5 @@ public interface adminAction {
 	void viewAllTrans();
 	void create();
 	void delete();
+	SuperUser loginu(int acntNum, String username, String password);
 }

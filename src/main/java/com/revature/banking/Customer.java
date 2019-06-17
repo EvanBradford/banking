@@ -1,6 +1,7 @@
 package com.revature.banking;
 
 import java.text.DecimalFormat;
+import dao.BankService;
 
 public class Customer extends Bankaccounts{
 	/**
@@ -32,9 +33,15 @@ public class Customer extends Bankaccounts{
 	}
 
 	@Override
-	public void login(String username, String password) {
-		setUsername(username);
-		setPassword(password);
+	public Customer login(int accountNum, String username, String password) {
+		Customer tmp = new Customer();
+		try {		
+			tmp = BankService.login(accountNum, username, password);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return null;
+		}
+		return tmp;
 	}
 
 	@Override
@@ -90,5 +97,10 @@ public class Customer extends Bankaccounts{
 		System.out.println("Username: " + getUsername() + "\nPassword: "+ getPassword());
 		System.out.println("Account: " + accountNum);
 		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
+	}
+	@Override
+	public SuperUser loginu(int acntNum, String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

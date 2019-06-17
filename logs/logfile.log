@@ -1,0 +1,2 @@
+[ERROR] 2019-06-16 21:07:08.859 [main] ConnectionUtil - Unable to get connection to database
+[ERROR] 2019-06-16 21:07:08.869 [main] BankOracle - Connection was null

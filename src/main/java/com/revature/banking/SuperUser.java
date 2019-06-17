@@ -1,6 +1,9 @@
 package com.revature.banking;
 
 import java.text.DecimalFormat;
+import java.util.List;
+
+import dao.BankService;
 
 public class SuperUser extends Bankaccounts{
 
@@ -21,9 +24,15 @@ public class SuperUser extends Bankaccounts{
 
 
 	@Override
-	public void login(String username, String password) {
-		System.out.println("Administrator");
-		System.out.println("Username: " + username + "\nPassword: "+ password);
+	public SuperUser loginu(int acntNum, String username, String password) {
+		SuperUser tmp = new SuperUser();
+		try {		
+			tmp = BankService.loginu(acntNum, username, password);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return null;
+		}
+		return tmp;
 	}
 
 	@Override
@@ -36,8 +45,14 @@ public class SuperUser extends Bankaccounts{
 	}
 	@Override
 	public void viewAllCust() {
-		// TODO Auto-generated method stub
-		super.viewAllCust();
+		List<Bankaccounts> list;
+		try {		
+			list = BankService.getAllAccounts();
+		} catch (Exception e) {
+			System.out.println("Opps.. (^_^)");
+			return;
+		}
+		System.out.println(list);
 	}
 	@Override
 	public void viewAllTrans() {
@@ -63,5 +78,10 @@ public class SuperUser extends Bankaccounts{
 	@Override
 	public void display(int accountNum) {
 		// TODO Auto-generated method stub	
+	}
+	@Override
+	public Customer login(int accountNum, String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

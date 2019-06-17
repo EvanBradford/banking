@@ -7,4 +7,5 @@ public interface customerAction {
 	void close(int accountNum);
 	void open();
 	void display(int accountNum);
+	Customer login(int accountNum, String username, String password);
 }
