@@ -10,5 +10,5 @@ public interface BankDao {
 	void delete(int acntNum) throws Exception;
 	Customer login(int acntNum, String userName, String password) throws Exception;
 	SuperUser loginu(int acntNum, String userName, String password) throws Exception;
-	void viewAccount(int acntNum) throws Exception;
+	void updateAccount(int acntNum, double balance) throws Exception;
 }

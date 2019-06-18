@@ -24,4 +24,9 @@ public class BankService {
 		dao.insert(acntType, firstName, lastName, userName, password, balance);
 		return;
 	}
+	public static void updateAccount(int acntNum, double balance) throws Exception
+	{
+		dao.updateAccount(acntNum, balance);
+		return;
+	}
 }

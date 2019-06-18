@@ -100,8 +100,9 @@ public class SuperUser extends Bankaccounts{
 	}
 	@Override
 	public String toString() {
-		return "SuperUser [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", username=" + username + ", password=" + password + ", balance=" + balance + "]";
+		return "\nAdmin:\nacntNum = " + acntNum + "\nacntType = " + acntType + "\nfirstname = " + firstname
+				+ "\nlastname = " + lastname + "\nusername = " + username + "\npassword = " + password + "\nbalance = "
+				+ balance + "\n";
 	}
 	
 }

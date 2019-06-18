@@ -53,6 +53,12 @@ public class Customer extends Bankaccounts{
 		double tmp = getBalance();
 		tmp += amount;
 		tmp = Math.round(tmp * 100.0) / 100.0;
+		try {		
+			BankService.updateAccount(acntNum, tmp);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
 		setBalance(tmp);
 	}
 
@@ -61,6 +67,12 @@ public class Customer extends Bankaccounts{
 		double tmp = getBalance();
 		tmp -= amount;
 		tmp = Math.round(tmp * 100.0) / 100.0;
+		try {		
+			BankService.updateAccount(acntNum, tmp);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
 		setBalance(tmp);
 	}
 
@@ -122,7 +134,8 @@ public class Customer extends Bankaccounts{
 	}
 	@Override
 	public String toString() {
-		return "Customer [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", username=" + username + ", password=" + password + ", balance=" + balance + "]";
+		return "\nCustomer:\nacntNum = " + acntNum + "\nacntType = " + acntType + "\nfirstname = " + firstname
+				+ "\nlastname = " + lastname + "\nusername = " + username + "\npassword = " + password + "\nbalance = "
+				+ balance + "\n";
 	}
 }

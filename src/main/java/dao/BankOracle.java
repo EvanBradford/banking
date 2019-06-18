@@ -165,19 +165,21 @@ public class BankOracle implements BankDao {
 	}
 	
 	@Override
-	public void viewAccount(int acntNum) throws Exception
+	public void updateAccount(int acntNum, double balance) throws Exception
 	{
-		// TODO Delete function
+		// TODO updates balance
 		Connection con = ConnectionUtil.getConnection();
 		if (con == null) {
 			log.error("Connection was null");
 			throw new Exception("Unable to connect to database");
 		}
 		try {
-			String sql = "call view_account(?)";
+			String sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, acntNum);
+			ps.setDouble(1, balance);
+			ps.setInt(2, acntNum);
 			ps.execute();
+			System.out.println("Balance Updated");
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
 			throw new Exception("Unable to connect to database");
