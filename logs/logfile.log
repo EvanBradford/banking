@@ -1,2 +1,31 @@
 [ERROR] 2019-06-16 21:07:08.859 [main] ConnectionUtil - Unable to get connection to database
 [ERROR] 2019-06-16 21:07:08.869 [main] BankOracle - Connection was null
+[ERROR] 2019-06-18 13:55:50.404 [main] BankOracle - Unable to execute sql query
+java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (EB012914.SYS_C005320) violated
+ORA-06512: at "EB012914.CREATE_ACCOUNT", line 4
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeLargeUpdate(OraclePreparedStatement.java:3865) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeUpdate(OraclePreparedStatement.java:3845) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.executeUpdate(OracleCallableStatement.java:4253) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeUpdate(OraclePreparedStatementWrapper.java:1061) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	at dao.BankOracle.insert(BankOracle.java:74) [classes/:?]
+	at dao.BankService.insert(BankService.java:24) [classes/:?]
+	at com.revature.banking.Customer.open(Customer.java:89) [classes/:?]
+	at com.revature.banking.Bank.main(Bank.java:72) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00001: unique constraint (EB012914.SYS_C005320) violated
+ORA-06512: at "EB012914.CREATE_ACCOUNT", line 4
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8-12.1.0.jar:12.2.0.1.0]
+	... 19 more

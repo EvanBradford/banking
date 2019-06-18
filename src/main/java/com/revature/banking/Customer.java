@@ -72,14 +72,27 @@ public class Customer extends Bankaccounts{
 
 	@Override
 	public void close(int accountNum) {
-		// TODO Auto-generated method stub
-		super.close(accountNum);
+		try {		
+			BankService.delete(accountNum);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
+		System.out.println("Account Deleted");
+		return;
 	}
 
 	@Override
-	public void open() {
+	public void open(String acntType, String firstName, String lastName, String userName, String password, double balance) {
 		// TODO Auto-generated method stub
-		super.open();
+		try {		
+			BankService.insert(acntType, firstName, lastName, userName, password, balance);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
+		System.out.println("Account Created");
+		return;
 	}
 	@Override
 	public void initialDeposit(double amount) {
@@ -102,5 +115,14 @@ public class Customer extends Bankaccounts{
 	public SuperUser loginu(int acntNum, String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	@Override
+	public String toString() {
+		return "Customer [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", username=" + username + ", password=" + password + ", balance=" + balance + "]";
 	}
 }

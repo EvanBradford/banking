@@ -26,7 +26,7 @@ public class SuperUser extends Bankaccounts{
 	@Override
 	public SuperUser loginu(int acntNum, String username, String password) {
 		SuperUser tmp = new SuperUser();
-		try {		
+		try {
 			tmp = BankService.loginu(acntNum, username, password);
 		} catch (Exception e) {
 			System.out.println("Oops.. (^_^)");
@@ -60,14 +60,28 @@ public class SuperUser extends Bankaccounts{
 		super.viewAllTrans();
 	}
 	@Override
-	public void create() {
+	public void create(String acntType, String firstName, String lastName, String userName, String password, double balance) {
 		// TODO Auto-generated method stub
-		super.create();
+		try {		
+			BankService.insert(acntType, firstName, lastName, userName, password, balance);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
+		System.out.println("Account Created");
+		return;
 	}
 	@Override
-	public void delete() {
+	public void delete(int accountNum) {
 		// TODO Auto-generated method stub
-		super.delete();
+		try {		
+			BankService.delete(accountNum);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
+		System.out.println("Account Deleted");
+		return;
 	}
 	@Override
 	public void initialDeposit(double amount) {
@@ -84,4 +98,10 @@ public class SuperUser extends Bankaccounts{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String toString() {
+		return "SuperUser [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", username=" + username + ", password=" + password + ", balance=" + balance + "]";
+	}
+	
 }

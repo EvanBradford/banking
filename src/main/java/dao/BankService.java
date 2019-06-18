@@ -16,4 +16,12 @@ public class BankService {
 	public static SuperUser loginu(int acntNum, String userName, String password) throws Exception{
 		return dao.loginu(acntNum, userName, password);
 	}
+	public static void delete(int acntNum) throws Exception{
+		dao.delete(acntNum);
+		return;
+	}
+	public static void insert(String acntType, String firstName, String lastName, String userName, String password, double balance) throws Exception {
+		dao.insert(acntType, firstName, lastName, userName, password, balance);
+		return;
+	}
 }

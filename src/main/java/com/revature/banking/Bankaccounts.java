@@ -152,12 +152,12 @@ public abstract class Bankaccounts implements Serializable, customerAction, admi
 		
 	}
 
-	public void create() {
+	public void create(String acntType, String firstName, String lastName, String userName, String password, double balance) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void delete() {
+	public void delete(int acntNum) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -182,7 +182,7 @@ public abstract class Bankaccounts implements Serializable, customerAction, admi
 		
 	}
 
-	public void open() {
+	public void open(String acntType, String firstName, String lastName, String userName, String password, double balance) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -194,8 +194,8 @@ public abstract class Bankaccounts implements Serializable, customerAction, admi
 
 	@Override
 	public String toString() {
-		return "Bankaccounts [acntNum=" + acntNum + ", acntType=" + acntType + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", username=" + username + ", password=" + password + ", balance="
-				+ balance + "]";
+		return "Bankaccounts:\nacntNum = " + acntNum + "\nacntType = " + acntType + "\nfirstname = " + firstname
+				+ "\nlastname = " + lastname + "\nusername = " + username + "\npassword = " + password + "\nbalance = "
+				+ balance;
 	}
 }

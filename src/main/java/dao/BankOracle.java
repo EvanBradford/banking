@@ -37,7 +37,7 @@ public class BankOracle implements BankDao {
 			list = new LinkedList<Bankaccounts>();
 			
 			while(rs.next()){
-				if(rs.getString("acntType").equals("SUPER"))
+				if(rs.getString("acntType").equals("ADMIN"))
 				{
 					list.add(new SuperUser(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance")));
 				}
@@ -71,8 +71,8 @@ public class BankOracle implements BankDao {
 			ps.setString(5, userName);
 			ps.setString(6, password);
 			ps.setDouble(7, balance);
-			ps.execute();
-			int id = ps.getInt(4);
+			ps.executeUpdate();
+			int id = ps.getInt(1);
 			System.out.println("Successfully Added to database: ");
 			System.out.println(id);
 		} catch (SQLException e) {
@@ -104,10 +104,6 @@ public class BankOracle implements BankDao {
 						tmp = new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance"));
 					}
 				}
-				else {
-					System.out.println("Incorrect input not in database, restart the program");
-					System.exit(0);
-				}
 			}
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
@@ -134,14 +130,10 @@ public class BankOracle implements BankDao {
 			{
 				if(rs.getString("Username").equals(userName) && rs.getString("password").equals(password) && (rs.getInt("acntNum") == acntNum))
 				{
-					if(rs.getString("acntType").equals("SuperUser"))
+					if(rs.getString("acntType").equals("ADMIN"))
 					{
 						tmp = new SuperUser(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance"));
 					}
-				}
-				else {
-					System.out.println("Incorrect input not in database, restart the program");
-					System.exit(0);
 				}
 			}
 		} catch (SQLException e) {
@@ -156,15 +148,16 @@ public class BankOracle implements BankDao {
 	{
 		// TODO Delete function
 		Connection con = ConnectionUtil.getConnection();
-		if (con == null) {
+		if  (con == null) {
 			log.error("Connection was null");
 			throw new Exception("Unable to connect to database");
 		}
 		try {
-			String sql = "call delete_account(?)";
+			String sql = "DELETE FROM BANKACCOUNTS WHERE ACNTNUM =?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, acntNum);
-			ps.execute();
+			int row = ps.executeUpdate();
+			System.out.println(row);
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
 			throw new Exception("Unable to connect to database");
