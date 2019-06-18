@@ -74,6 +74,7 @@ public class BankOracle implements BankDao {
 			ps.executeUpdate();
 			int id = ps.getInt(1);
 			System.out.println("Successfully Added to database: ");
+			System.out.print("Your account numbe is: ");
 			System.out.println(id);
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
@@ -184,5 +185,51 @@ public class BankOracle implements BankDao {
 			log.error("Unable to execute sql query", e);
 			throw new Exception("Unable to connect to database");
 		}
+	}
+	@Override
+	public void transferFunds(int acntNum1,int acntNum2, double amount, double balance) throws Exception
+	{
+		// TODO updates balance
+				Connection con = ConnectionUtil.getConnection();
+				Customer tmp = new Customer();
+				if (con == null) {
+					log.error("Connection was null");
+					throw new Exception("Unable to connect to database");
+				}
+				try {
+					//Gets current balance of transferee
+					String sql = "select * from BANKACCOUNTS where acntnum=?";
+					PreparedStatement ps = con.prepareStatement(sql);
+					ps.setInt(1, acntNum2);
+					ResultSet rs = ps.executeQuery();
+					while(rs.next())
+					{
+						if((rs.getInt("acntNum") == acntNum2))
+						{
+							tmp = new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance"));
+						}
+					}
+					//calculates new balance for account 2
+					amount += tmp.getBalance();
+					amount = Math.round(amount * 100.0) / 100.0;
+					//Updates first account with the lower balance
+					sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
+					ps = con.prepareStatement(sql);
+					ps.setDouble(1, balance);
+					ps.setInt(2, acntNum1);
+					ps.execute();
+					
+					//updates second account with higher balance
+					sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
+					ps = con.prepareStatement(sql);
+					ps.setDouble(1, amount);
+					ps.setInt(2, acntNum2);
+					ps.execute();
+					System.out.println("Balances Updated");
+					System.out.println("New Balance: $" + balance);
+				} catch (SQLException e) {
+					log.error("Unable to execute sql query", e);
+					throw new Exception("Unable to connect to database");
+				}
 	}
 }

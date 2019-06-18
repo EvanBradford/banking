@@ -65,6 +65,11 @@ public class Customer extends Bankaccounts{
 	@Override
 	public void withdraw(double amount, int accountNum) {
 		double tmp = getBalance();
+		if(tmp < amount)
+		{
+			System.out.println("Account overdrawn Aborting operation");
+			return;
+		}
 		tmp -= amount;
 		tmp = Math.round(tmp * 100.0) / 100.0;
 		try {		
@@ -78,8 +83,21 @@ public class Customer extends Bankaccounts{
 
 	@Override
 	public void transfer(double amount, int accountNum1, int accountNum2) {
-		// TODO Auto-generated method stub
-		super.transfer(amount, accountNum1, accountNum2);
+		double tmp = getBalance();
+		if(tmp < amount)
+		{
+			System.out.println("Account overdrawn Aborting operation");
+			return;
+		}
+		tmp -= amount;
+		tmp = Math.round(tmp * 100.0) / 100.0;
+		try {		
+			BankService.transferFunds(accountNum1,accountNum2, amount, tmp);
+		} catch (Exception e) {
+			System.out.println("Oops.. (^_^)");
+			return;
+		}
+		setBalance(tmp);
 	}
 
 	@Override

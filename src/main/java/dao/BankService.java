@@ -29,4 +29,9 @@ public class BankService {
 		dao.updateAccount(acntNum, balance);
 		return;
 	}
+	public static void transferFunds(int acntNum1,int acntNum2, double amount, double balance) throws Exception
+	{
+		dao.transferFunds(acntNum1, acntNum2, amount, balance);
+		return;
+	}
 }

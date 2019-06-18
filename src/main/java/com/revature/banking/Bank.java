@@ -80,19 +80,20 @@ public class Bank
 				switch(choice)
 				{
 					case 1:
-						System.out.println("How much are you depositing?");
+						System.out.println("How much money are you depositing?");
+						System.out.print("$");
 						amount = jin.nextDouble();
-						account.deposit(amount, accountNum);
+						account.deposit(amount, account.getAcntNum());
 						break;
 					case 2:
-						System.out.println("How much are you withdrawing?");
+						System.out.println("How much money are you withdrawing?");
+						System.out.print("$");
 						amount = jin.nextDouble();
-						account.withdraw(amount, accountNum);
+						account.withdraw(amount, account.getAcntNum());
 						break;
 					case 3:
 						//optional
-						System.out.println("WIP Doesn't Do anything yet");
-						System.out.println("How much are you transferring?");
+						System.out.println("How much money are you transferring?");
 						amount = jin.nextDouble();
 						System.out.println("What account number are you transferring to?");
 						accountNum2 = jin.nextInt();
