@@ -3,10 +3,9 @@ package com.revature.banking;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Bank 
+public class Bank
 {
 	public static Scanner jin = new Scanner(System.in);
-	@SuppressWarnings("null")
 	public static void main(String[] args)
 	{
 		Bankaccounts account = new Customer();

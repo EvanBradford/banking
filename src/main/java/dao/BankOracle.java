@@ -184,11 +184,10 @@ public class BankOracle implements BankDao {
 			ps.setInt(2, acntNum);
 			ps.execute();
 			System.out.println("Balance Updated");
-			
-			String trans = date + " Account #" + acntNum + " Deposited $" + df.format(amount);
-		
 			df.setMinimumFractionDigits(2);
 			df.setMaximumFractionDigits(2);
+			String trans = date + " Account #" + acntNum + " Deposited $" + df.format(amount);
+		
 			sql = "call create_trans(?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);
@@ -222,11 +221,10 @@ public class BankOracle implements BankDao {
 			ps.setInt(2, acntNum);
 			ps.execute();
 			System.out.println("Balance Updated");
-			
-			String trans = date + " Account #" + acntNum + " Withdrew $" + df.format(amount);
-			
 			df.setMinimumFractionDigits(2);
 			df.setMaximumFractionDigits(2);
+			String trans = date + " Account #" + acntNum + " Withdrew $" + df.format(amount);
+			
 			sql = "call create_trans(?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);
@@ -284,11 +282,10 @@ public class BankOracle implements BankDao {
 			ps.execute();
 			System.out.println("Balances Updated");
 			System.out.println("New Balance: $" + balance);
-			
-			String trans = date + " Account #" + acntNum1 + " Transferred $" + df.format(amount) + " to Account #" + acntNum2;
-			
 			df.setMinimumFractionDigits(2);
 			df.setMaximumFractionDigits(2);
+			String trans = date + " Account #" + acntNum1 + " Transferred $" + df.format(amount) + " to Account #" + acntNum2;
+			
 			sql = "call create_trans(?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);

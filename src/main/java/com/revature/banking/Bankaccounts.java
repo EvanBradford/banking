@@ -19,7 +19,6 @@ public abstract class Bankaccounts implements Serializable, customerAction, admi
 	{
 		
 	}
-	
 	public Bankaccounts(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance) {
 		super();
 		this.acntNum = acntNum;
