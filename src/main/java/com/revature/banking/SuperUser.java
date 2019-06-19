@@ -1,9 +1,6 @@
 package com.revature.banking;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import dao.BankService;
@@ -13,8 +10,7 @@ public class SuperUser extends Bankaccounts{
 	/**
 	 * 
 	 */
-	private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	private static final long serialVersionUID = -5319764797495658012L;
+	private static final long serialVersionUID = 6724643624835747665L;
 
 	public SuperUser() {
 		super();
@@ -58,8 +54,17 @@ public class SuperUser extends Bankaccounts{
 	}
 	@Override
 	public void viewAllTrans() {
-		Date date = new Date();
-        System.out.println(sdf.format(date));
+		List<String> list;
+		try {		
+			list = BankService.getAllTrans();
+		} catch (Exception e) {
+			System.out.println("Opps.. (^_^)");
+			return;
+		}
+		for(int i = 0; i < list.size(); i++)
+		{	
+			System.out.println(list.get(i));
+		}
 	}
 	@Override
 	public void create(String acntType, String firstName, String lastName, String userName, String password, double balance) {

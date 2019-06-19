@@ -49,7 +49,7 @@ public class Customer extends Bankaccounts{
 		tmp += amount;
 		tmp = Math.round(tmp * 100.0) / 100.0;
 		try {		
-			BankService.updateAccount(acntNum, tmp);
+			BankService.deposit(acntNum, tmp, amount);
 		} catch (Exception e) {
 			System.out.println("Oops.. (^_^)");
 			return;
@@ -68,7 +68,7 @@ public class Customer extends Bankaccounts{
 		tmp -= amount;
 		tmp = Math.round(tmp * 100.0) / 100.0;
 		try {		
-			BankService.updateAccount(acntNum, tmp);
+			BankService.withdraw(acntNum, tmp, amount);
 		} catch (Exception e) {
 			System.out.println("Oops.. (^_^)");
 			return;

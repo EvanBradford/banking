@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,8 +18,8 @@ import com.revature.banking.*;
 import util.ConnectionUtil;
 
 public class BankOracle implements BankDao {
-
 	private static final Logger log = LogManager.getLogger(BankOracle.class);
+	private static final DecimalFormat df = new DecimalFormat();
 
 	public List<Bankaccounts> getAll() throws Exception {
 		Connection con = ConnectionUtil.getConnection();
@@ -166,9 +168,10 @@ public class BankOracle implements BankDao {
 	}
 	
 	@Override
-	public void updateAccount(int acntNum, double balance) throws Exception
+	public void deposit(int acntNum, double balance, double amount) throws Exception
 	{
-		// TODO updates balance
+		//updates balance
+		Date date = new Date();
 		Connection con = ConnectionUtil.getConnection();
 		if (con == null) {
 			log.error("Connection was null");
@@ -181,6 +184,59 @@ public class BankOracle implements BankDao {
 			ps.setInt(2, acntNum);
 			ps.execute();
 			System.out.println("Balance Updated");
+			
+			String trans = date + " Account #" + acntNum + " Deposited $" + df.format(amount);
+		
+			df.setMinimumFractionDigits(2);
+			df.setMaximumFractionDigits(2);
+			sql = "call create_trans(?, ?, ?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.registerOutParameter(1, Types.INTEGER);
+			cs.setString(2, trans);
+			cs.setInt(3, acntNum);
+			cs.executeUpdate();
+			int id = cs.getInt(1);
+			System.out.println("Successfully Added transaction to database");
+			System.out.print("Your transaction number is: ");
+			System.out.println(id);
+			
+		} catch (SQLException e) {
+			log.error("Unable to execute sql query", e);
+			throw new Exception("Unable to connect to database");
+		}
+	}
+	@Override
+	public void withdraw(int acntNum, double balance, double amount) throws Exception
+	{
+		// TODO updates balance
+		Date date = new Date();
+		Connection con = ConnectionUtil.getConnection();
+		if (con == null) {
+			log.error("Connection was null");
+			throw new Exception("Unable to connect to database");
+		}
+		try {
+			String sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setDouble(1, balance);
+			ps.setInt(2, acntNum);
+			ps.execute();
+			System.out.println("Balance Updated");
+			
+			String trans = date + " Account #" + acntNum + " Withdrew $" + df.format(amount);
+			
+			df.setMinimumFractionDigits(2);
+			df.setMaximumFractionDigits(2);
+			sql = "call create_trans(?, ?, ?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.registerOutParameter(1, Types.INTEGER);
+			cs.setString(2, trans);
+			cs.setInt(3, acntNum);
+			cs.executeUpdate();
+			int id = cs.getInt(1);
+			System.out.println("Successfully Added transaction to database");
+			System.out.print("Your transaction number is: ");
+			System.out.println(id);
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);
 			throw new Exception("Unable to connect to database");
@@ -189,47 +245,90 @@ public class BankOracle implements BankDao {
 	@Override
 	public void transferFunds(int acntNum1,int acntNum2, double amount, double balance) throws Exception
 	{
-		// TODO updates balance
-				Connection con = ConnectionUtil.getConnection();
-				Customer tmp = new Customer();
-				if (con == null) {
-					log.error("Connection was null");
-					throw new Exception("Unable to connect to database");
+		// TODO updates balances
+		Date date = new Date();
+		Connection con = ConnectionUtil.getConnection();
+		Customer tmp = new Customer();
+		if (con == null) {
+			log.error("Connection was null");
+			throw new Exception("Unable to connect to database");
+		}
+		try {
+			//Gets current balance of transferee
+			String sql = "select * from BANKACCOUNTS where acntnum=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, acntNum2);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				if((rs.getInt("acntNum") == acntNum2))
+				{
+					tmp = new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance"));
 				}
-				try {
-					//Gets current balance of transferee
-					String sql = "select * from BANKACCOUNTS where acntnum=?";
-					PreparedStatement ps = con.prepareStatement(sql);
-					ps.setInt(1, acntNum2);
-					ResultSet rs = ps.executeQuery();
-					while(rs.next())
-					{
-						if((rs.getInt("acntNum") == acntNum2))
-						{
-							tmp = new Customer(rs.getInt("acntNum"), rs.getString("acntType"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"), rs.getDouble("balance"));
-						}
-					}
-					//calculates new balance for account 2
-					amount += tmp.getBalance();
-					amount = Math.round(amount * 100.0) / 100.0;
-					//Updates first account with the lower balance
-					sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
-					ps = con.prepareStatement(sql);
-					ps.setDouble(1, balance);
-					ps.setInt(2, acntNum1);
-					ps.execute();
-					
-					//updates second account with higher balance
-					sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
-					ps = con.prepareStatement(sql);
-					ps.setDouble(1, amount);
-					ps.setInt(2, acntNum2);
-					ps.execute();
-					System.out.println("Balances Updated");
-					System.out.println("New Balance: $" + balance);
-				} catch (SQLException e) {
-					log.error("Unable to execute sql query", e);
-					throw new Exception("Unable to connect to database");
-				}
+			}
+			//calculates new balance for account 2
+			amount += tmp.getBalance();
+			amount = Math.round(amount * 100.0) / 100.0;
+			//Updates first account with the lower balance
+			sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, balance);
+			ps.setInt(2, acntNum1);
+			ps.execute();
+			
+			//updates second account with higher balance
+			sql = "UPDATE BANKACCOUNTS SET BALANCE = ? WHERE ACNTNUM = ?";
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, amount);
+			ps.setInt(2, acntNum2);
+			ps.execute();
+			System.out.println("Balances Updated");
+			System.out.println("New Balance: $" + balance);
+			
+			String trans = date + " Account #" + acntNum1 + " Transferred $" + df.format(amount) + " to Account #" + acntNum2;
+			
+			df.setMinimumFractionDigits(2);
+			df.setMaximumFractionDigits(2);
+			sql = "call create_trans(?, ?, ?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.registerOutParameter(1, Types.INTEGER);
+			cs.setString(2, trans);
+			cs.setInt(3, acntNum1);
+			cs.executeUpdate();
+			int id = cs.getInt(1);
+			System.out.println("Successfully Added transaction to database");
+			System.out.print("Your transaction number is: ");
+			System.out.println(id);
+		} catch (SQLException e) {
+			log.error("Unable to execute sql query", e);
+			throw new Exception("Unable to connect to database");
+		}
+	}
+	public List<String> getAllTrans() throws Exception
+	{
+		Connection con = ConnectionUtil.getConnection();
+
+		if (con == null) {
+			log.error("Connection was null");
+			throw new Exception("Unable to connect to database");
+		}
+
+		List<String> list;
+		
+		try {			
+			String sql = "select TRANS from TRANSACTIONS";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			list = new LinkedList<String>();
+			
+			while(rs.next()){
+				list.add(rs.getString("TRANS"));
+			}
+		}catch (SQLException e) {
+			log.error("Unable to execute sql query", e);
+			throw new Exception("Unable to connect to database");
+		}
+		return list;
 	}
 }
