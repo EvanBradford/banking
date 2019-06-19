@@ -74,7 +74,7 @@ public class BankOracle implements BankDao {
 			ps.executeUpdate();
 			int id = ps.getInt(1);
 			System.out.println("Successfully Added to database: ");
-			System.out.print("Your account numbe is: ");
+			System.out.print("Your account number is: ");
 			System.out.println(id);
 		} catch (SQLException e) {
 			log.error("Unable to execute sql query", e);

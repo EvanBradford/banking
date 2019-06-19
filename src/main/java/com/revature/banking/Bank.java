@@ -162,6 +162,7 @@ public class Bank
 						break;
 					case 4:
 						System.out.println("WIP");
+						admin.viewAllTrans();
 						break;
 					case 5:
 						banking = false;

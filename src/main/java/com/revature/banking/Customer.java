@@ -11,24 +11,19 @@ public class Customer extends Bankaccounts{
 
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	//User(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
 	public Customer(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
 	{
 		super(acntNum, acntType, firstname, lastname, username, password, balance);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
 
 	public double getBalance() {
-		// TODO Auto-generated method stub
 		return super.getBalance();
 	}
 
 	public void setBalance(double balance) {
-		// TODO Auto-generated method stub
 		super.setBalance(balance);
 	}
 
@@ -114,7 +109,6 @@ public class Customer extends Bankaccounts{
 
 	@Override
 	public void open(String acntType, String firstName, String lastName, String userName, String password, double balance) {
-		// TODO Auto-generated method stub
 		try {		
 			BankService.insert(acntType, firstName, lastName, userName, password, balance);
 		} catch (Exception e) {
@@ -124,15 +118,9 @@ public class Customer extends Bankaccounts{
 		System.out.println("Account Created");
 		return;
 	}
-	@Override
-	public void initialDeposit(double amount) {
-		// TODO Auto-generated method stub
-		setBalance(amount);
-	}
 
 	@Override
 	public void display(int accountNum) {
-		// TODO Auto-generated method stub
 		DecimalFormat df = new DecimalFormat();
 		df.setMinimumFractionDigits(2);
 		df.setMaximumFractionDigits(2);
@@ -140,11 +128,6 @@ public class Customer extends Bankaccounts{
 		System.out.println("Username: " + getUsername() + "\nPassword: "+ getPassword());
 		System.out.println("Account: " + accountNum);
 		System.out.println("Balance: $" + df.format(getBalance()) + "\n");
-	}
-	@Override
-	public SuperUser loginu(int acntNum, String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	@Override
 	public int hashCode() {

@@ -1,25 +1,27 @@
 package com.revature.banking;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import dao.BankService;
 
 public class SuperUser extends Bankaccounts{
-
+	
 	/**
 	 * 
 	 */
+	private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static final long serialVersionUID = -5319764797495658012L;
 
 	public SuperUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public SuperUser(int acntNum, String acntType, String firstname, String lastname, String username, String password, double balance)
 	{
 		super(acntNum, acntType, firstname, lastname, username, password, balance);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -56,12 +58,11 @@ public class SuperUser extends Bankaccounts{
 	}
 	@Override
 	public void viewAllTrans() {
-		// TODO Auto-generated method stub
-		super.viewAllTrans();
+		Date date = new Date();
+        System.out.println(sdf.format(date));
 	}
 	@Override
 	public void create(String acntType, String firstName, String lastName, String userName, String password, double balance) {
-		// TODO Auto-generated method stub
 		try {		
 			BankService.insert(acntType, firstName, lastName, userName, password, balance);
 		} catch (Exception e) {
@@ -73,7 +74,6 @@ public class SuperUser extends Bankaccounts{
 	}
 	@Override
 	public void delete(int accountNum) {
-		// TODO Auto-generated method stub
 		try {		
 			BankService.delete(accountNum);
 		} catch (Exception e) {
@@ -84,25 +84,9 @@ public class SuperUser extends Bankaccounts{
 		return;
 	}
 	@Override
-	public void initialDeposit(double amount) {
-		// TODO Auto-generated method stub
-		setBalance(amount);
-	}
-
-	@Override
-	public void display(int accountNum) {
-		// TODO Auto-generated method stub	
-	}
-	@Override
-	public Customer login(int accountNum, String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public String toString() {
 		return "\nAdmin:\nacntNum = " + acntNum + "\nacntType = " + acntType + "\nfirstname = " + firstname
 				+ "\nlastname = " + lastname + "\nusername = " + username + "\npassword = " + password + "\nbalance = "
 				+ balance + "\n";
 	}
-	
 }

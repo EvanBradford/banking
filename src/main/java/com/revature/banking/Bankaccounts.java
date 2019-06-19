@@ -87,10 +87,10 @@ public abstract class Bankaccounts implements Serializable, customerAction, admi
 		this.acntType = acntType;
 	}
 
-	public Customer login(String username, String password) {
+	public Customer login(int accountNum, String username, String password) {
 		return null;
 	}
-	public SuperUser loginu(String username, String password) {
+	public SuperUser loginu(int accountNum, String username, String password) {
 		return null;
 	}
 	public void account(int accountNumber) {
