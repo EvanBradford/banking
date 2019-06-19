@@ -188,11 +188,12 @@ public class BankOracle implements BankDao {
 			df.setMaximumFractionDigits(2);
 			String trans = date + " Account #" + acntNum + " Deposited $" + df.format(amount);
 		
-			sql = "call create_trans(?, ?, ?)";
+			sql = "call create_trans(?, ?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, trans);
-			cs.setInt(3, acntNum);
+			cs.setDouble(3, amount);
+			cs.setInt(4, acntNum);
 			cs.executeUpdate();
 			int id = cs.getInt(1);
 			System.out.println("Successfully Added transaction to database");
@@ -225,11 +226,12 @@ public class BankOracle implements BankDao {
 			df.setMaximumFractionDigits(2);
 			String trans = date + " Account #" + acntNum + " Withdrew $" + df.format(amount);
 			
-			sql = "call create_trans(?, ?, ?)";
+			sql = "call create_trans(?, ?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, trans);
-			cs.setInt(3, acntNum);
+			cs.setDouble(3, amount);
+			cs.setInt(4, acntNum);
 			cs.executeUpdate();
 			int id = cs.getInt(1);
 			System.out.println("Successfully Added transaction to database");
@@ -243,6 +245,7 @@ public class BankOracle implements BankDao {
 	@Override
 	public void transferFunds(int acntNum1,int acntNum2, double amount, double balance) throws Exception
 	{
+		double transfer = amount;
 		// TODO updates balances
 		Date date = new Date();
 		Connection con = ConnectionUtil.getConnection();
@@ -284,13 +287,14 @@ public class BankOracle implements BankDao {
 			System.out.println("New Balance: $" + balance);
 			df.setMinimumFractionDigits(2);
 			df.setMaximumFractionDigits(2);
-			String trans = date + " Account #" + acntNum1 + " Transferred $" + df.format(amount) + " to Account #" + acntNum2;
+			String trans = date + " Account #" + acntNum1 + " Transferred $" + df.format(transfer) + " to Account #" + acntNum2;
 			
-			sql = "call create_trans(?, ?, ?)";
+			sql = "call create_trans(?, ?, ?, ?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, trans);
-			cs.setInt(3, acntNum1);
+			cs.setDouble(3, transfer);
+			cs.setInt(4, acntNum1);
 			cs.executeUpdate();
 			int id = cs.getInt(1);
 			System.out.println("Successfully Added transaction to database");
